@@ -80,7 +80,26 @@ for year in range(1, years_to_simulate + 1):
     
     buy_net_worth.append(max(0, (current_home_value - current_loan_balance) - (current_home_value * selling_costs_pct)))
     rent_net_worth.append(max(0, renter_portfolio - (max(0, renter_portfolio - renter_cost_basis) * capital_gains_tax)))
+# --- INITIAL MONTHLY BREAKDOWN ---
+st.subheader("Year 1: Monthly Cash Flow Breakdown")
 
+# Calculate Year 1 monthly extras for the buyer
+initial_taxes_ins_maint = (home_price * property_tax_rate / 12) + (home_price * home_insurance_rate / 12) + (home_price * maintenance_rate / 12)
+initial_total_buy = monthly_pi + initial_taxes_ins_maint
+initial_total_rent = monthly_rent + renters_insurance
+initial_investment = max(0, initial_total_buy - initial_total_rent)
+
+colA, colB, colC, colD = st.columns(4)
+with colA: 
+    st.metric("Mortgage (P&I)", f"${int(monthly_pi):,}")
+with colB: 
+    st.metric("Taxes/Ins/Maint", f"${int(initial_taxes_ins_maint):,}")
+with colC: 
+    st.metric("Total Buy Cost", f"${int(initial_total_buy):,}")
+with colD: 
+    st.metric("Renter's Investment", f"${int(initial_investment):,}")
+
+st.divider()
 # Display
 st.subheader(f"Results after {years_to_simulate} Years")
 col1, col2, col3 = st.columns(3)
