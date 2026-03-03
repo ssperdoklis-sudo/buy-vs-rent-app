@@ -143,7 +143,7 @@ for year in range(1, years_to_simulate + 1):
 
 # --- UI DISPLAY ---
 st.subheader("Year 1: Monthly Cash Flow Breakdown")
-[Image of a scale balancing a house and a bag of money]
+
 colA, colB, colC, colD = st.columns(4)
 with colA: 
     st.metric("Mortgage (P&I)", f"€{int(monthly_pi):,}")
@@ -179,7 +179,7 @@ st.line_chart(chart_data)
 
 # --- DATA TABLE ---
 with st.expander("📊 View Detailed Yearly Data (Click to expand)"):
-    [Image of an amortization schedule chart]
+    
     df_yearly = pd.DataFrame(yearly_data).set_index("Year")
     st.dataframe(df_yearly, use_container_width=True)
     
